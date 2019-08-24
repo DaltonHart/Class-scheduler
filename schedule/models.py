@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 CHOICES = (("MORNING", "9-10"), ("MORNING_2", "1015-1230"), ("AFTERNOON",
                                                              "130-3"), ("AFTERNOON2", "315-5"), ("HOMEWORK", "HOMEWORK"))
+DAY_CHOICES = (("MONDAY", "Monday"), ("TUESDAY", "Tuesday"), ("WEDNESDAY",
+                                                              "Wednesday"), ("THURSDAY", "Thursday"), ("FRIDAY", "Friday"))
 
 
 class Cohort(models.Model):
@@ -19,7 +21,7 @@ class Cohort(models.Model):
 
 class Schedule_Lesson(models.Model):
     week = models.IntegerField()
-    day = models.IntegerField()
+    day = models.CharField(choices=DAY_CHOICES, max_length=20)
     slot = models.CharField(choices=CHOICES, max_length=20)
     cohort = models.ForeignKey(
         'Cohort', on_delete=models.CASCADE, related_name='schedule_items')
