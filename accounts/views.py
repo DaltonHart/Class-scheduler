@@ -7,11 +7,10 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
+
 def register(request):
     if request.method == 'POST':
         # Get form values
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
@@ -29,7 +28,7 @@ def register(request):
                 else:
                     # Register User
                     user = User.objects.create_user(
-                        username=username, password=password, email=email, first_name=first_name, last_name=last_name)
+                        username=username, password=password, email=email)
                     user.save()
                     return redirect('login')
         else:
@@ -47,13 +46,14 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('artist_list')
+            return redirect('home')
         else:
             return render(request, 'login.html', {'error': 'Invalid Credentials...'})
 
     else:
         return render(request, 'login.html')
 
+
 def logout(request):
     auth.logout(request)
-    return redirect('artist_list')
+    return redirect('home')
