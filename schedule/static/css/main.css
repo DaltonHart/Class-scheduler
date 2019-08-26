@@ -23,7 +23,7 @@
 }
 
 body {
-  background: var(--light-black);
+  background: var(--white);
   font-family: "Roboto", sans-serif;
   margin: 0;
 }

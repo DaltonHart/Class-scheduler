@@ -5,6 +5,8 @@ from django.contrib import auth
 # IMPORT DJANGO USER MODEL
 from django.contrib.auth.models import User
 
+from .forms import ProfileForm
+
 # Create your views here.
 
 
@@ -32,9 +34,11 @@ def register(request):
                     user.save()
                     return redirect('login')
         else:
+            form = ProfileForm()
             return render(request, 'register.html', {'error': 'Passwords do not match'})
     else:
-        return render(request, 'register.html')
+        form = ProfileForm()
+        return render(request, 'register.html', {'form': form})
 
 
 def login(request):
